@@ -8,7 +8,7 @@ Documentation and tools used for the DLC's translation are preserved here.
 
 # About
 **Currently looking for additional translators to help us speed things along!**  
-Translation is being done through Google Sheets. Will make the sheets public once I get everything ready and setted up.   
+Translation is being done through Google Sheets. Will make the sheets public once I get everything ready. 
 If this project goes through, a re-translation/re-work of vc3translationproject's unfinished translation is considered.  
 
 # Hacking Info
