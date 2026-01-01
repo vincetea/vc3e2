@@ -22,12 +22,14 @@ If this project goes through, a re-translation/re-work of vc3translationproject'
 
 # Special Thanks
 - Everyone that supported me through gbatemp and Reddit
+- Those that gave helpful advice in the [Fan Translations International's Discord server](https://fantranslators.info/contact/)
 - IcySon55 - Providing advice and giving me the push and tools to work on this project.
 - Belmondo - Making the [pgdecrypt](https://gbatemp.net/threads/pgd-encrypter.432029/)
 - aluigi - Creating [quickbms](https://aluigi.altervista.org/quickbms.htm) and the CPK scripts for it
 - PPSSPP Team - Making the [PPSSPP emulator](https://github.com/hrydgard/ppsspp) with debugging and texture viewing features
 - Brolijah - Creating [Yet Another CPK Tool](https://github.com/Brolijah/YACpkTool)
-- Those that gave helpful advice in the [Fan Translations International's Discord server](https://fantranslators.info/contact/)
+- UMDGen Team - Creating [UMDGen](https://www.romhacking.net/utilities/1218/)
+- Bunaki9448 - Making this [PSP hacking guide](https://www.romhacking.net/documents/905/) 
 - unknownbrackets - Creating this very helpful Valkyria Chronicles 3 file formarts [document](https://gist.github.com/unknownbrackets/78c4631a4091044d381432ffb7f1bae4)
 
 # Additional Links
