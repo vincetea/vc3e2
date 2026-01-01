@@ -3,7 +3,7 @@ DATA.BIN is where most of the game files are located. DATA.BIN can be extracted 
 <img width="210" height="882" alt="image" src="https://github.com/user-attachments/assets/5c5ca5e1-de5e-43d2-98a8-923c688587f2" />  
 
 # PGD 
-The DATA.BIN file is initially encrypted with PGD (Protected Game Data), data format used to store game data. It can be decrypted with pgdecrypt. Once decrypted,  the DATA.BIN is revealed to be a CPK archive file.
+The DATA.BIN file is initially encrypted with PGD (Protected Game Data), a data format used to store game data. It can be decrypted with pgdecrypt. Once decrypted, the DATA.BIN is revealed to be a CPK archive file.
 
 # CPK
 Cri Ware's proprietary archive file. Files can be extracted from the CPK archive using quickbms with a CPK script. 
