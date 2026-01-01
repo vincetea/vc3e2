@@ -1,5 +1,5 @@
 # Valkyria Chronicles 3 Extra Edition DLC
-Files and documentation for the DLC's translation are preserved here. 
+Documentation and tools used for the DLC's translation are preserved here. 
 
 # Goal and Intent
 - A full translation of the paid DLC that isn't included in the base game of Valkyria Chronicles 3 Extra Edition.
@@ -23,6 +23,11 @@ If this project goes through, a re-translation/re-work of vc3translationproject'
 # Special Thanks
 - Everyone that supported me through gbatemp and Reddit
 - IcySon55 - Providing advice and giving me the push to work on this project.
+- Those that gave helpful advice in the [Fan Translations International's Discord server](https://fantranslators.info/contact/)
 - unknownbrackets - Creating this very helpful Valkyria Chronicles 3 file formarts [document](https://gist.github.com/unknownbrackets/78c4631a4091044d381432ffb7f1bae4)
 
-
+# Additional Links
+- [Initial gbatemp post](https://gbatemp.net/threads/valkyria-chronicles-3-extra-edition-dlc-translation.673052/)
+- [Reddit post](https://www.reddit.com/r/valkyria/comments/1lu8rwj/looking_for_translatorseditors_for_valkyria/)
+- [Romhacking.net post](https://www.romhacking.net/forum/index.php?topic=40437.0)
+- [Proof of Concept Video](https://www.youtube.com/watch?v=diamA4atQCM) 
