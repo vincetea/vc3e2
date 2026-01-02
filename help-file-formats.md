@@ -1,5 +1,5 @@
 # Valkyria Chronicles 3 - File Formats
-
+**This is edited version of unknownbrackets' documentation. Edits by me are surrounded by `.**
 ## DATA.BIN datafile
 
 This is a PGD-encrypted CPK file.  The file can be decrypted using widely
@@ -406,7 +406,7 @@ beginning of the data.
 	    uint32[2] unknown             unknown meaning.
 	    uint32 path_ptr               pointer to path string.
 	    uint32 filename_ptr           pointer to filename string.
-	    uint32[6] unknown             unknown meaning.
+	    uint32[`12`] unknown          unknown meaning.
 
 	something3[]                      always something3_count of them.
 	    uint32 unknown                increases, seems like a pointer?  doesn't seem to match file?
