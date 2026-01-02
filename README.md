@@ -13,6 +13,7 @@ If this project goes through, a re-translation/re-work of vc3translationproject'
 
 # Hacking Info
 - [DATA.BIN Extraction](https://github.com/vincetea/vc3e2_dlc/blob/main/Extracting%20DATA.BIN.md)
+- [File Format Documentation](https://github.com/vincetea/vc3e2_dlc/blob/main/help-file-formats.md)
 
 
 # Contributors
