@@ -122,6 +122,7 @@ def skip_padding(mxe_path, txt_block_s_offset, something1_s_offset):
                 break
             s_txt_offset += 1
             mxe.seek(s_txt_offset)
+    print(f"s_txt_offset =  {hex(s_txt_offset)}")
     return s_txt_offset
 
 def copy_somethings(mxe_path, something1_s_offset, s_txt_offset):
@@ -163,30 +164,36 @@ def get_datapack_size(mxe_path):
     return mxeNP_size, mxeCP_size, mxeCD_size
 
 
-def get_edited_text(csv_path, s_txt_offset, txt_block_s_offset):    
+def get_edited_text(csv_path, s_txt_offset, txt_block_s_offset):
     segments = []
-    with open(csv_path, newline='', encoding='cp932', errors = 'replace') as csvfile:
+    # Read CSV as UTF-8
+    with open(csv_path, newline='', encoding='utf-8', errors='replace') as csvfile:
         reader = csv.reader(csvfile)
-        #Disable reading the first row or nah
-        next(reader, None)
+        next(reader, None)  # skip header if present
+
         for row in reader:
-            if len(row) > 4:
-                text = row[4]
+            if len(row) < 6:
+                continue
 
-                raw_pointers = row[3].split('|')
-                pointers = [int(p, 16) for p in raw_pointers]
-            
-                num_nulls = int(row[2]) - 1
-                trailing_bytes = bytes([0x00] * num_nulls)
+            text = row[3]                 # Column D only
+            num_nulls = int(row[4])       # Column E
+            raw_pointers = row[5].split('|')  # Column F
 
-                segment_data = unescape_hex(text) + b'\x00' + trailing_bytes
+            pointers = [int(p, 16) for p in raw_pointers if p]
 
-                segments.append((segment_data, pointers))
-                print(segments)
-                total_text_bytes = sum(len(segment) for segment, _ in segments) + (s_txt_offset - txt_block_s_offset)
-                print ("ass")
-                print(f"{total_text_bytes}\n")
+            # Encode Japanese text exactly as cp932
+            segment_bytes = text.encode('cp932', errors='replace')
+
+            # Add trailing nulls exactly as in CSV
+            segment_bytes += bytes([0x00] * num_nulls)
+
+            segments.append((segment_bytes, pointers))
+    total_text_bytes = sum(len(segment) for segment, _ in segments) + (s_txt_offset - txt_block_s_offset)
+    print(f"Total text bytes including offset adjustment: {total_text_bytes}")
+
     return segments
+
+
 
 def writetofile(output_path, segments, mxenheader_Size): 
     with open(output_path, "wb") as out:
@@ -258,26 +265,32 @@ def main():
         if filename.lower().endswith('.mxe'):
             base = os.path.splitext(filename)[0]
             mxe_path = os.path.join(input_mxe_dir, filename)
-            csv_path = os.path.join(input_csv_dir, base + '.csv')
-            output_path = os.path.join(output_dir, filename)
 
-            if os.path.exists(csv_path):
-               mxenheader_Size, mxecheader_Size = copy_header(mxe_path)
-               s_offset_somethings_info, somethings_info_Size = copy_somethings_info(mxe_path, mxenheader_Size, mxecheader_Size)
-               txt_block_s_offset, something1_s_offset = findtext(mxe_path, s_offset_somethings_info, mxenheader_Size, mxecheader_Size, somethings_info_Size)
-               s_txt_offset = skip_padding(mxe_path, txt_block_s_offset, something1_s_offset)
-               copy_somethings(mxe_path, something1_s_offset, s_txt_offset)
-               ogfilesize = get_ogfilesize(mxe_path)
-               p_offset = findtext_end(mxe_path, txt_block_s_offset)
-               copy_end(mxe_path, p_offset, ogfilesize)
-               mxeNP_size, mxeCP_size, mxeCD_size = get_datapack_size(mxe_path)
-               segments = get_edited_text(csv_path, s_txt_offset, txt_block_s_offset)
-               newtext_offsets = writetofile(output_path, segments, mxenheader_Size)
-               update_sizes_ptrs(output_path, ogfilesize, newtext_offsets, mxeNP_size, mxeCP_size, mxeCD_size)
-               convertutf8(csv_path)
+            # --- Automatically find matching CSV ---
+            csv_path = None
+            for f in os.listdir(input_csv_dir):
+                if base in f and f.lower().endswith('.csv'):
+                    csv_path = os.path.join(input_csv_dir, f)
+                    break
+
+            if csv_path and os.path.exists(csv_path):
+                output_path = os.path.join(output_dir, filename)
+                mxenheader_Size, mxecheader_Size = copy_header(mxe_path)
+                s_offset_somethings_info, somethings_info_Size = copy_somethings_info(mxe_path, mxenheader_Size, mxecheader_Size)
+                txt_block_s_offset, something1_s_offset = findtext(mxe_path, s_offset_somethings_info, mxenheader_Size, mxecheader_Size, somethings_info_Size)
+                s_txt_offset = skip_padding(mxe_path, txt_block_s_offset, something1_s_offset)
+                copy_somethings(mxe_path, something1_s_offset, s_txt_offset)
+                ogfilesize = get_ogfilesize(mxe_path)
+                p_offset = findtext_end(mxe_path, txt_block_s_offset)
+                copy_end(mxe_path, p_offset, ogfilesize)
+                mxeNP_size, mxeCP_size, mxeCD_size = get_datapack_size(mxe_path)
+                segments = get_edited_text(csv_path, s_txt_offset, txt_block_s_offset)
+                newtext_offsets = writetofile(output_path, segments, mxenheader_Size)
+                update_sizes_ptrs(output_path, ogfilesize, newtext_offsets, mxeNP_size, mxeCP_size, mxeCD_size)
+                convertutf8(csv_path)
 
             else:
                 print(f"CSV not found for: {filename}")
-
+                
 if __name__ == "__main__":
     main()
