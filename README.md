@@ -8,7 +8,7 @@ Documentation and tools used for the DLC's translation are preserved here.
 
 # About
 **Currently looking for additional translators to help us speed things along!**  
-Translation is being done through [Google Sheets & Google Drive](https://drive.google.com/drive/folders/1EqrrOQNoOkGf92SVAaQfkUN5sgeLsYHG?usp=drive_link)
+Translation is being done through [Google Sheets & Google Drive](https://drive.google.com/drive/folders/1EqrrOQNoOkGf92SVAaQfkUN5sgeLsYHG?usp=drive_link)  
 If this project goes through, a re-translation/re-work of vc3translationproject's unfinished translation may be considered.  
 
 # Hacking Info
